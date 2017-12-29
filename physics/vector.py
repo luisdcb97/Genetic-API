@@ -53,6 +53,10 @@ class Vector:
         self.x = norm.x
         self.y = norm.y
 
+    @staticmethod
+    def equals(vector1, vector2):
+        return vector1 == vector2
+
     def __getitem__(self, item):
         if item == 0:
             return self.x
@@ -119,3 +123,7 @@ class Vector:
 
     def __neg__(self):
         return self.__class__(-self.x, -self.y)
+
+    def __eq__(self, other):
+        return type(other) == type(self) and \
+               self.x == other.x and self.y == other.y
