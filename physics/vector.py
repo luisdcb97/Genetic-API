@@ -69,6 +69,9 @@ class Vector:
         name = f"{self.__class__.__module__}.{self.__class__.__qualname__}"
         return f"{name}({self.x}, {self.y})"
 
+    def __str__(self):
+        return f"{self.__class__.__name__}({self.x}, {self.y})"
+
     # region Add overload
     def __add__(self, other):
         if type(other) != type(self):
