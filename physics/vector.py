@@ -10,83 +10,82 @@ class Vector:
         self.y = y
 
     @classmethod
-    def down(cls):
+    def down(cls) -> "Vector":
         return cls(0, -1)
 
     @classmethod
-    def up(cls):
+    def up(cls) -> "Vector":
         return cls(0, 1)
 
     @classmethod
-    def left(cls):
+    def left(cls) -> "Vector":
         return cls(-1, 0)
 
     @classmethod
-    def right(cls):
+    def right(cls) -> "Vector":
         return cls(1, 0)
 
     @classmethod
-    def one(cls):
+    def one(cls) -> "Vector":
         return cls(1, 1)
 
     @classmethod
-    def zero(cls):
+    def zero(cls) -> "Vector":
         return cls(0, 0)
 
     @property
-    def square_magnitude(self):
+    def square_magnitude(self) -> Number:
         return self.x ** 2 + self.y ** 2
 
     @property
-    def magnitude(self):
+    def magnitude(self) -> Number:
         return math.sqrt(self.square_magnitude)
 
     @property
-    def normalized(self):
+    def normalized(self) -> "Vector":
         length = self.magnitude
         if length <= 0:
             raise ValueError("The zero vector cannot be normalized")
-        return Vector(self.x / length, self.y / length)
+        return self.__class__(self.x / length, self.y / length)
 
-    def normalize(self):
+    def normalize(self) -> None:
         norm = self.normalized
         self.x = norm.x
         self.y = norm.y
 
-    def angle(self):
+    def angle(self) -> float:
         return math.atan2(self.y, self.x)
 
     @staticmethod
-    def equals(vector1, vector2):
+    def equals(vector1: "Vector", vector2: "Vector") -> bool:
         return vector1 == vector2
 
     @staticmethod
-    def dot_product(vector1, vector2):
+    def dot_product(vector1: "Vector", vector2: "Vector") -> Number:
         return vector1.x * vector2.x + vector1.y * vector2.y
 
     @staticmethod
-    def clamp_magnitude(vector, max_length):
+    def clamp_magnitude(vector: "Vector", max_length: Number):
         magnitude = vector.magnitude
-
         ratio = 1
         if magnitude > max_length:
             ratio = max_length / vector.magnitude
         return vector * ratio
 
     @staticmethod
-    def distance(vector1, vector2):
+    def distance(vector1: "Vector", vector2: "Vector") -> Number:
         x = vector1.x - vector2.x
         y = vector1.y - vector2.y
         return math.sqrt(x ** 2 + y ** 2)
 
     @staticmethod
-    def angle_between(vector1, vector2):
+    def angle_between(vector1: "Vector", vector2: "Vector") -> Number:
         """ Returns angle between vectors in radians in interval [-PI, PI]"""
         return math.atan2(vector2.y, vector2.x) - \
             math.atan2(vector1.y, vector1.x)
 
     @staticmethod
-    def lerp(vector1, vector2, amount: float):
+    def lerp(vector1: "Vector", vector2: "Vector", amount: float) -> "Vector":
         x = vector1.x * (1 - amount) + vector2.x * amount
         y = vector1.y * (1 - amount) + vector2.y * amount
         return vector1.__class__(x, y)
