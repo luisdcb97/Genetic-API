@@ -53,9 +53,43 @@ class Vector:
         self.x = norm.x
         self.y = norm.y
 
+    def angle(self):
+        return math.atan2(self.y, self.x)
+
     @staticmethod
     def equals(vector1, vector2):
         return vector1 == vector2
+
+    @staticmethod
+    def dot_product(vector1, vector2):
+        return vector1.x * vector2.x + vector1.y * vector2.y
+
+    @staticmethod
+    def clamp_magnitude(vector, max_length):
+        magnitude = vector.magnitude
+
+        ratio = 1
+        if magnitude > max_length:
+            ratio = max_length / vector.magnitude
+        return vector * ratio
+
+    @staticmethod
+    def distance(vector1, vector2):
+        x = vector1.x - vector2.x
+        y = vector1.y - vector2.y
+        return math.sqrt(x ** 2 + y ** 2)
+
+    @staticmethod
+    def angle_between(vector1, vector2):
+        """ Returns angle between vectors in radians in interval [-PI, PI]"""
+        return math.atan2(vector2.y, vector2.x) - \
+            math.atan2(vector1.y, vector1.x)
+
+    @staticmethod
+    def lerp(vector1, vector2, amount: float):
+        x = vector1.x * (1 - amount) + vector2.x * amount
+        y = vector1.y * (1 - amount) + vector2.y * amount
+        return vector1.__class__(x, y)
 
     def __getitem__(self, item):
         if item == 0:
