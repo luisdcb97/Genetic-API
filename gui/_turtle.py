@@ -1,5 +1,6 @@
 from genetic.population import Population, Element
-import turtle as t
+import turtle
 
 if __name__ == "__main__":
-    t.Turtle()
+    t = turtle.Turtle()
+    t.forward(100)
