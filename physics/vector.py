@@ -1,4 +1,5 @@
 import math
+from random import random
 import typing
 
 Number = typing.Union[float, int]
@@ -32,6 +33,12 @@ class Vector:
     @classmethod
     def zero(cls) -> "Vector":
         return cls(0, 0)
+
+    @classmethod
+    def random(cls):
+        x = 1/random()
+        y = 1/random()
+        return cls(x, y)
 
     @property
     def square_magnitude(self) -> Number:
