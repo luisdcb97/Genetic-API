@@ -6,7 +6,7 @@ class Element(object):
         self.position: Vector = position \
             if position is not None else Vector.random()
         self.velocity: Vector = velocity \
-            if velocity is not None else Vector.random()
+            if velocity is not None else Vector.zero()
         self.acceleration: Vector = Vector.zero()
 
     def apply_force(self, force: Vector):
